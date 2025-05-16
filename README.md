@@ -1,91 +1,56 @@
-# Neural Network from Scratch
+# Loan Prediction Neural Network
 
-This project implements a feedforward neural network from scratch using only NumPy, without relying on any deep learning libraries like PyTorch or TensorFlow.
+A neural network implementation from scratch using NumPy to predict loan approval.
 
-## Features
+## How to Run the Project
 
-- A fully-connected feedforward neural network with two hidden layers
-- Implemented using object-oriented design
-- Manual implementation of forward propagation and backpropagation
-- Sigmoid activation function for all layers
-- Mean Squared Error (MSE) loss function
-- Gradient descent optimizer
-- Synthetic data generation for training and testing
+### Setup
 
-## Architecture
+1. Create a virtual environment:
 
-- Input layer: 2 neurons (height and weight)
-- First hidden layer: 4 neurons
-- Second hidden layer: 4 neurons
-- Output layer: 1 neuron (binary classification)
+   ```
+   python3 -m venv venv
+   ```
 
-## Installation
+2. Activate the virtual environment:
 
-1. Ensure you have Python 3 installed.
-2. Install the required packages:
+   - On macOS/Linux:
+     ```
+     source venv/bin/activate
+     ```
+   - On Windows:
+     ```
+     venv\Scripts\activate
+     ```
 
-```bash
-pip install -r requirements.txt
+3. Install dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
+
+### Running the Model
+
+Run the loan predictor with default parameters:
+
+```
+python loan_predictor.py
 ```
 
-## Data Generation
+### Command-line Options
 
-The project includes a data generation script that creates synthetic height/weight data with gender labels:
+Customize the run with these parameters:
 
-```bash
-python generate_dataset.py
+```
+python loan_predictor.py --hidden1 12 --hidden2 8 --epochs 500 --lr 0.0005 --batch_size 16
 ```
 
-This will:
+Available options:
 
-1. Generate a balanced dataset of 120 samples (60 males, 60 females)
-2. Create realistic integer values for heights (150-200 cm) and weights (45-100 kg)
-3. Save the data to `gender_data.csv`
-
-The data generator uses normal distributions with different parameters for males and females:
-
-- Males: Mean height 178cm, mean weight 80kg
-- Females: Mean height 165cm, mean weight 62kg
-
-## Usage
-
-After generating the dataset, run the main.py file to train and test the neural network:
-
-```bash
-python main.py
-```
-
-This will:
-
-1. Load the dataset from `gender_data.csv`
-2. Split it into training (80%) and testing (20%) sets
-3. Normalize the features by subtracting the mean and dividing by standard deviation
-4. Train the neural network for 5000 epochs
-5. Evaluate the model on test data and report accuracy
-6. Test with custom examples to show generalization
-
-## Customization
-
-You can modify the neural network architecture by changing the parameters in main.py:
-
-```python
-nn = NeuralNetwork(
-    input_size=2,
-    hidden1_size=4,
-    hidden2_size=4,
-    output_size=1,
-    learning_rate=0.5
-)
-```
-
-You can also adjust the number of epochs and how often to print the loss:
-
-```python
-losses = nn.train(X_train_normalized, y_train, epochs=5000, print_every=500)
-```
-
-For data generation, you can modify parameters in generate_dataset.py:
-
-```python
-df = generate_gender_dataset(n_samples=120, random_seed=42)
-```
+- `--data`: Path to the data file (default: 'loan-train.csv')
+- `--hidden1`: Number of neurons in first hidden layer (default: 12)
+- `--hidden2`: Number of neurons in second hidden layer (default: 8)
+- `--epochs`: Number of training epochs (default: 500)
+- `--lr`: Learning rate (default: 0.0005)
+- `--batch_size`: Batch size for mini-batch gradient descent (default: 16)
+- `--test_size`: Proportion of data to use for testing (default: 0.2)
+- `--output`: Path to save predictions (default: 'predictions.csv')
