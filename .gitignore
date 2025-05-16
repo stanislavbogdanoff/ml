@@ -16,12 +16,6 @@ ENV/
 .env/
 .venv/
 
-# Project specific
-*.csv
-predictions*.csv
-loan_predictions*.csv
-!loan-train.csv
-
 # Jupyter Notebook
 .ipynb_checkpoints
 
