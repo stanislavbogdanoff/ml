@@ -1,7 +1,7 @@
 import numpy as np
 
 class NeuralNetwork:
-    def __init__(self, input_size, hidden1_size, hidden2_size, output_size, learning_rate=0.001, reg_lambda=0.001):
+    def __init__(self, input_size, hidden1_size, hidden2_size, output_size, learning_rate=0.001, reg_lambda=0.001, random_seed=42):
         """
         Initialize a neural network with two hidden layers
         
@@ -12,6 +12,7 @@ class NeuralNetwork:
         output_size (int): Number of output neurons (1 for binary classification)
         learning_rate (float): Learning rate for gradient descent
         reg_lambda (float): L2 regularization strength
+        random_seed (int or None): Random seed for reproducibility
         """
         self.input_size = input_size
         self.hidden1_size = hidden1_size
@@ -21,7 +22,8 @@ class NeuralNetwork:
         self.reg_lambda = reg_lambda
         
         # Set random seed for reproducibility
-        np.random.seed(42)
+        if random_seed is not None:
+            np.random.seed(random_seed)
         
         # He initialization for ReLU activations in hidden layers
         self.W1 = np.random.randn(input_size, hidden1_size) * np.sqrt(2. / input_size) 
